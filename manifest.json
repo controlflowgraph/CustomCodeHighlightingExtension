@@ -1,0 +1,18 @@
+{
+    "manifest_version": 2,
+    "name": "CustomCodeHighlightingExtension",
+    "version": "0.1",
+
+    "description": "Allows the specification of custom syntax highlighting for markdown snippets on (public) github repository pages.",
+
+    "icons": {
+        "48": "icons/icon-48.png"
+    },
+
+    "content_scripts": [
+        {
+            "matches": ["*://github.com/*/*"],
+            "js": ["high.js"]
+        }
+    ]
+}
