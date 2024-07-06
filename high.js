@@ -44,11 +44,10 @@ function getLanguage(snippet) {
 }
 
 function loadAllLanguages(snippets) {
-    const languages = snippets.map(getLanguage)
+    return Promise.all(snippets.map(getLanguage)
         .filter((val, idx, arr) => arr.indexOf(val) === idx)
-        .map(httpGet)
-        .map(loadHighlightingFile);
-    return Promise.all(languages);
+        .map(httpGet))
+        .then(res => res.map(loadHighlightingFile));
 }
 
 function getHighlighting(languages, language) {
