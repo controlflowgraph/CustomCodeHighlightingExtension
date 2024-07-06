@@ -23,20 +23,25 @@ function isNotEmptyOrSpaces(str) {
     return str.match(/^ *$/) === null;
 }
 
-function parseLine(line) {
+function parseLine(lang, line) {
     const regex = /^(?<name>[a-zA-Z]+) +(?<color>"(\\\\.|.)*") (?<pattern>"(\\\\.|.)*")$/;
-    const groups = line.match(regex).groups;
+    const match = line.match(regex);
+    if (match == null) {
+        console.warn("Line '" + line + "' in definition of '" + lang + "' is malformed!");
+        return null;
+    }
     return {
-        name: groups.name,
-        color: eval(groups.color),
-        pattern: new RegExp(eval(groups.pattern))
+        name: match.groups.name,
+        color: eval(match.groups.color),
+        pattern: new RegExp(eval(match.groups.pattern))
     };
 }
 
 function loadHighlightingFile(highlighting) {
     return [highlighting[0], highlighting[1].split("\n")
         .filter(isNotEmptyOrSpaces)
-        .map(parseLine)];
+        .map(l => parseLine(highlighting[0], l))
+        .filter(a => a != null)];
 }
 
 function getLanguage(snippet) {
