@@ -69,7 +69,7 @@ function getBestPattern(highlighting, text) {
         const match = pattern.pattern.exec(text);
         if (match != null) {
             match.color = pattern.color;
-            if (currentBest == null) {
+            if (currentBest == null || (currentBest.index > match.index)) {
                 currentBest = match;
             }
         }
