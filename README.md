@@ -6,6 +6,10 @@ if __name__ == "__main__":
     print("Hello world!")
 ```
 
-```custom
+```custom-lang1
 this is a custom language
+```
+
+```custom-lang2
+a totally different custom language
 ```
