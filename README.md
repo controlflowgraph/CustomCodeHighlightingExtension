@@ -19,3 +19,14 @@ this is a custom language
 ```custom-lang2
 a totally different custom language
 ```
+
+This is minimal highlighting for java:
+```custom-similar-to-java
+public class Main
+{
+    public static void main(String[] args)
+    {
+        System.out.println("Hello world!");
+    }
+}
+```

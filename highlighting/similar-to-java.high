@@ -1,0 +1,4 @@
+keyword "#965102" "(this|super|public|private|protected|class|final|static|void|return)"
+float "#00ddff" "[0-9]+\\.[0-9]+"
+int "#00ddff" "[0-9]+"
+string "#0b8700" "\"(\\.|.)*\""
