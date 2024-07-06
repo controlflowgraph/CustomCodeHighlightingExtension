@@ -14,5 +14,8 @@
             "matches": ["*://github.com/*/*"],
             "js": ["high.js"]
         }
+    ],
+    "permissions": [
+        "*://raw.githubusercontent.com/*"
     ]
 }
