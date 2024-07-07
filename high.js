@@ -115,15 +115,19 @@ function processAll() {
         });
 }
 
+function isCurrentUrlMarkdown() {
+    return document.URL.endsWith(".md");
+}
+
+function isCurrentUrlDirectory() {
+    return document.URL.replace(/.+\//, "").indexOf('.') === -1;
+}
+
 const body = document.getElementsByTagName("body")[0];
 const config = {attributes: true, childList: true, subtree: true};
-let previousUrl = null;
 const observer = new MutationObserver((l, o) => {
-    const currentUrl = document.URL;
-    if (currentUrl !== previousUrl) {
-        if (currentUrl.endsWith(".md") || currentUrl.replace(/.+\//, "").indexOf('.') === -1) {
-            processAll();
-        }
+    if (isCurrentUrlMarkdown() || isCurrentUrlDirectory()) {
+        processAll();
     }
 });
 observer.observe(body, config);
