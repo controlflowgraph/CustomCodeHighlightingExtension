@@ -1,5 +1,5 @@
 function isCustomSnippet(snippet) {
-    return /^custom-.+$/.test(snippet.getAttribute("lang"));
+    return /^custom:.+$/.test(snippet.getAttribute("lang"));
 }
 
 function getCustomSnippets() {
@@ -52,7 +52,7 @@ function loadHighlightingFile(highlighting) {
 }
 
 function getLanguage(snippet) {
-    return snippet.getAttribute("lang").replace("custom-", "");
+    return snippet.getAttribute("lang").replace("custom:", "");
 }
 
 function loadAllLanguages(snippets) {
