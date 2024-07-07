@@ -32,8 +32,8 @@ function parseLine(lang, line) {
     }
     return {
         name: match.groups.name,
-        color: eval(match.groups.color),
-        pattern: new RegExp(eval(match.groups.pattern))
+        color: JSON.parse(match.groups.color),
+        pattern: new RegExp(JSON.parse(match.groups.pattern))
     };
 }
 
