@@ -7,8 +7,7 @@ function getCustomSnippets() {
         .filter(isCustomSnippet);
 }
 
-function buildHighlightingUrl()
-{
+function buildHighlightingUrl() {
     const regex = /https:\/\/github.com\/(?<user>[^\/]+)\/(?<repo>[^\/]+).*/;
     const groups = document.URL.match(regex).groups;
     return `https://raw.githubusercontent.com/${(groups.user)}/${(groups.repo)}/main/LANGUAGE.high`;
@@ -56,7 +55,9 @@ function getLanguage(snippet) {
 }
 
 function loadAllLanguages(snippets) {
-    return Promise.all(snippets.map(getLanguage)
+    return Promise.all(snippets
+        .filter(s => !s.done)
+        .map(getLanguage)
         .filter((val, idx, arr) => arr.indexOf(val) === idx)
         .map(httpGet))
         .then(res => res.map(loadHighlightingFile));
@@ -105,10 +106,24 @@ function processAll() {
     loadAllLanguages(snippets)
         .then(languages => {
             for (let snippet of snippets) {
-                const high = getHighlighting(languages, getLanguage(snippet));
-                snippet.innerHTML = convertText(high, snippet.innerText);
+                if (!snippet.done) {
+                    const high = getHighlighting(languages, getLanguage(snippet));
+                    snippet.innerHTML = convertText(high, snippet.innerText);
+                    snippet.done = true
+                }
             }
         });
 }
 
-processAll();
+const body = document.getElementsByTagName("body")[0];
+const config = {attributes: true, childList: true, subtree: true};
+let previousUrl = null;
+const observer = new MutationObserver((l, o) => {
+    const currentUrl = document.URL;
+    if (currentUrl !== previousUrl) {
+        if (currentUrl.endsWith(".md") || currentUrl.replace(/.+\//, "").indexOf('.') === -1) {
+            processAll();
+        }
+    }
+});
+observer.observe(body, config);
