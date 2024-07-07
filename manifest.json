@@ -1,5 +1,5 @@
 {
-    "manifest_version": 2,
+    "manifest_version": 3,
     "name": "CustomCodeHighlightingExtension",
     "version": "0.1",
 
@@ -15,7 +15,7 @@
             "js": ["high.js"]
         }
     ],
-    "permissions": [
+    "host_permissions": [
         "*://raw.githubusercontent.com/*"
     ]
 }
