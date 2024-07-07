@@ -108,7 +108,8 @@ function processAll() {
             for (let snippet of snippets) {
                 if (!snippet.done) {
                     const high = getHighlighting(languages, getLanguage(snippet));
-                    snippet.innerHTML = convertText(high, snippet.innerText);
+                    let codeElement = snippet.children[0];
+                    codeElement.innerHTML = convertText(high, codeElement.innerText);
                     snippet.done = true
                 }
             }
