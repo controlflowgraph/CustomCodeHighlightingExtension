@@ -7,7 +7,14 @@ function getCustomSnippets() {
         .filter(isCustomSnippet);
 }
 
-const url = document.URL.replace("github", "raw.githubusercontent") + "/main/highlighting/LANGUAGE.high";
+function buildHighlightingUrl()
+{
+    const regex = /https:\/\/github.com\/(?<user>[^\/]+)\/(?<repo>[^\/]+).*/;
+    const groups = document.URL.match(regex).groups;
+    return `https://raw.githubusercontent.com/${(groups.user)}/${(groups.repo)}/main/highlighting/LANGUAGE.high`;
+}
+
+const url = buildHighlightingUrl();
 
 function httpGet(language) {
     const target = url.replace("LANGUAGE", language);
