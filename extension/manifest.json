@@ -17,5 +17,10 @@
     ],
     "host_permissions": [
         "*://raw.githubusercontent.com/*"
-    ]
+    ],
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "bdd1b3d5-4361-48c0-b3d0-2bb844030b53"
+        }
+    }
 }
