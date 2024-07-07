@@ -11,7 +11,7 @@ function buildHighlightingUrl()
 {
     const regex = /https:\/\/github.com\/(?<user>[^\/]+)\/(?<repo>[^\/]+).*/;
     const groups = document.URL.match(regex).groups;
-    return `https://raw.githubusercontent.com/${(groups.user)}/${(groups.repo)}/main/highlighting/LANGUAGE.high`;
+    return `https://raw.githubusercontent.com/${(groups.user)}/${(groups.repo)}/main/LANGUAGE.high`;
 }
 
 const url = buildHighlightingUrl();
